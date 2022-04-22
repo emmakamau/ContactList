@@ -67,3 +67,5 @@ class Contact:
         pyperclip.copy(contact_found.email)
 
     pass
+
+
