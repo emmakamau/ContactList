@@ -17,4 +17,27 @@ class Contact:
     def save_contact(self):
         Contact.contact_list.append(self)
 
+    """delete_contact method deletes a saved contact from the contact_list"""
+    def delete_contact(self):
+        Contact.contact_list.remove(self)
+
+    """
+    Method that takes in a number and returns a contact that matches that number.
+    Args: Phone number to search for
+    Returns : Contact of person that matches the number.
+
+    NB: 
+        1. Decorators allow you to make simple modifications to callable objects 
+            like functions, methods, or classes.
+        2. @classmethod Simply informs the python interpreter that this is a method 
+            that belongs to the entire class.
+        3. cls referred to the entire class, and does not need to be passed in when 
+            we call the method.
+    """
+    @classmethod
+    def find_by_number(cls,phone_number):
+        for contact in cls.contact_list:
+            if contact.phone_number == phone_number:
+                return contact
+
     pass
