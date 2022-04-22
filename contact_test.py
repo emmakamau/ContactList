@@ -8,13 +8,17 @@ BDD- expectations which are factors that we will test
 """
 
 import unittest  # Python test framework
+"""
+Pyperclip will allow us to copy and paste items to our clipboard.
+Instal xclip as well for pyperclip to run
+"""
+import pyperclip 
 from contact import Contact
 
 """
 Test class that defines test cases for the contact class behaviours.
 Args: unittest.TestCase: TestCase class that helps in creating test cases
 """
-
 
 class TestContact(unittest.TestCase):
     """
@@ -86,6 +90,31 @@ class TestContact(unittest.TestCase):
         found_contact = Contact.find_by_number("0711223344")
 
         self.assertEqual(found_contact.email,test_contact.email)
+
+    #Testcase6 => test to check if we can return a Boolean  if we cannot find the contact.
+    def test_contact_exists(self):
+        """
+        Here we created the class method contact_exist that loops through all the saved contacts and 
+        checks if any matches the number passed in. Then it returns a boolean value.
+        """
+        self.new_contact.save_contact()
+        test_contact = Contact("Test","user","0711223344","test@user.com") # new contact
+        test_contact.save_contact()
+
+        contact_exists = Contact.contact_exist("0711223344")
+
+        self.assertTrue(contact_exists)
+
+    #Testcase7 => method that returns a list of all contacts saved
+    def test_display_all_contacts(self):
+        self.assertEqual(Contact.display_contacts(),Contact.contact_list)
+
+    #Testcase8 => Test to confirm that we are copying the email address from a found contact
+    def test_copy_email(self):
+        self.new_contact.save_contact()
+        Contact.copy_email("0712345678")
+
+        self.assertEqual(self.new_contact.email,pyperclip.paste())
 
 
 """

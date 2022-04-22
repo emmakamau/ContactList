@@ -1,11 +1,13 @@
+import pyperclip # Pyperclip will allow us to copy and paste items to our clipboard.
+
 # Class that generates new instances of contacts
 class Contact:
     contact_list = [] # Empty contact list
 
     """
-    1. __init__ method that helps us define properties for our objects.
-    2. Data inside the brackets are called arguments/variables
-    3. self is a variable that represents the instance of the object itself.
+    1. __init__ method helps us define properties for our objects.
+    2. Data inside the brackets are called arguments/variables.
+    3. self is a variable that represents an instance of an object.
     """
     def __init__(self,first_name,last_name,phone_number,email):
         self.first_name = first_name
@@ -39,5 +41,29 @@ class Contact:
         for contact in cls.contact_list:
             if contact.phone_number == phone_number:
                 return contact
+    
+    """
+    Method that checks if a contact exists from the contact list.
+    Args: Phone number to search if it exists
+    Returns : True or false depending if the contact exists
+    """            
+    @classmethod
+    def contact_exist(cls,phone_number):
+        for contact in cls.contact_list:
+            if contact.phone_number == phone_number:
+                    return True
+        return False
+
+    """
+    Method that returns the contact list
+    """
+    @classmethod
+    def display_contacts(cls):
+        return cls.contact_list
+
+    @classmethod
+    def copy_email(cls,phone_number):
+        contact_found = Contact.find_by_number(phone_number)
+        pyperclip.copy(contact_found.email)
 
     pass
