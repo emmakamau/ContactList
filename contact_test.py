@@ -1,3 +1,12 @@
+"""
+BDD- expectations which are factors that we will test
+1. Allow us to Create new contacts with properties.
+2. Save contacts.
+3. Display contacts.
+4. Delete contacts.
+5. Display contact information.
+"""
+
 import unittest  # Python test framework
 from contact import Contact
 
@@ -14,7 +23,8 @@ class TestContact(unittest.TestCase):
     def setUp(self): 
         #Create contact object
         self.new_contact = Contact("James", "Muriuki", "0712345678", "james@ms.com") 
-    #test_init test case to test if the object is initialized properly 
+
+    #Testcase1 => test_init test case to test if the object is initialized properly 
     def test_init(self):
         """
         We see some new syntax here self.assertEqual() this is a TestCase method that checks for an 
@@ -26,6 +36,18 @@ class TestContact(unittest.TestCase):
         self.assertEqual(self.new_contact.last_name, "Muriuki")
         self.assertEqual(self.new_contact.phone_number, "0712345678")
         self.assertEqual(self.new_contact.email, "james@ms.com")
+
+    #Testcase2 => test_save_contact test case to test if the contact object is saved into the contact list
+    def test_save_contact(self):
+        """
+        1. Here we created a test called test_save_contact that calls a save_contact method to our newly 
+            generated object.
+        2. Then we check the length of our contact_list list to confirm an addition has been made to our 
+            contact list.
+        """
+        self.new_contact.save_contact() # saving the new contact
+        self.assertEqual(len(Contact.contact_list),1)
+
 """
 1. By defining the condition if __name__ == '__main__': we are confirming that anything inside the 
     if block should run only if this is the file that is currently being run.

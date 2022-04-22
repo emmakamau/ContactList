@@ -1,14 +1,7 @@
-"""
-BDD- expectations
-1. Allow us to Create new contacts with properties.
-2. Save contacts.
-3. Display contacts.
-4. Delete contacts.
-5. Display contact information.
-"""
-
 # Class that generates new instances of contacts
 class Contact:
+    contact_list = [] # Empty contact list
+
     """
     1. __init__ method that helps us define properties for our objects.
     2. Data inside the brackets are called arguments/variables
@@ -19,5 +12,9 @@ class Contact:
         self.last_name = last_name
         self.phone_number = phone_number
         self.email = email
+
+    """save_contact method saves contact objects into contact_list. """
+    def save_contact(self):
+        Contact.contact_list.append(self)
 
     pass
